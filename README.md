@@ -1,54 +1,59 @@
 # 🎯 Prompt Attribution Visualizer
 
-Визуализация влияния инструкций промпта на ответы LLM моделей.
+Visualize how system prompt instructions shape an LLM's response.
 
-## ✨ Возможности
+## ✨ Features
 
-- Пошаговый анализ влияния системного промпта
-- Клик по куску ответа → подсветка частей промпта, которые на него повлияли
-- Надёжная атрибуция: куски ответа якорятся к реальному тексту (без fuzzy-угадывания выделения)
+- Select any fragment of the response → see which prompt rules influenced it
+- Attribution by both content and form (casing, length, grammar, style)
+- Highlights rule conflicts (e.g. "lowercase" vs "follow capitalization rules")
+- Overlap-safe prompt highlighting with influence-weighted colors
 
-## 🚀 Запуск
+## 🚀 Getting started
 
 ```bash
 npm install
-npm run dev        # дев-сервер (http://localhost:5173)
-npm run build      # прод-сборка в dist/
-npm run preview    # предпросмотр сборки
+npm run dev        # dev server (http://localhost:5173)
+npm run build      # production build to dist/
+npm run preview    # preview the build
 ```
 
-Дальше в браузере:
+Then in the browser:
 
-1. Введи OpenAI API ключ
-2. Настрой системный промпт и запрос
-3. Получи ответ → проанализируй → кликай по кускам ответа
+1. Enter your OpenAI API key
+2. Set the system prompt and the user message
+3. Get the response → select any text in it → the influencing prompt parts get highlighted
 
-## 📝 Пример
+The API key lives only in the browser tab's memory — it is never stored or logged, and goes straight to OpenAI.
 
-**Системный промпт:**
+## 📝 Example
+
+**System prompt:**
+
+```text
+1) be concise
+2) write everything in lowercase
+3) write grammatically correct
+4) always follow proper capitalization rules
 ```
-1) пиши коротко
-2) все слова маленькими буквами
-3) пиши грамотно
-```
 
-**Запрос:** «Спроси меня про поездку в Париж»
-**Ответ:** «как твоя поездка в париж?»
+**User message:** "Ask me how my trip to Paris went"
+**Response:** "how did your trip to paris go?"
 
-Клик по «париж» → видно конфликт правила #2 (маленькие буквы) и #3 (грамотно).
+Select "paris" → rule #2 (lowercase) is highlighted as the cause, in conflict with rule #4 (capitalization).
 
-## 🛠️ Технологии
+## 🛠️ Tech
 
 - React 18 + Vite
 - Tailwind CSS (CDN)
-- OpenAI API (`gpt-4o`, JSON mode для анализа)
+- OpenAI API (`gpt-4o`, JSON mode for analysis)
 
-## 🗂️ Структура
+## 🗂️ Structure
 
-| Файл | Назначение |
+| File | Purpose |
 |---|---|
-| `src/api.js` | вызовы OpenAI (ответ + анализ-атрибуция) |
-| `src/attribution.js` | чистая логика матчинга кусков и подсветки |
-| `src/App.jsx` | UI и оркестрация шагов |
+| `src/api.js` | OpenAI calls (response + per-fragment attribution) |
+| `src/attribution.js` | pure matching and highlighting logic |
+| `src/App.jsx` | UI and step orchestration |
 
-> Прежняя версия — single-file `prompt_analyzer.html` — оставлена в репозитории.
+> The previous single-file version, `prompt_analyzer.html`, is kept in the repo.
