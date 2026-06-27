@@ -100,6 +100,7 @@ export default function App() {
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="sk-..."
             />
+            <p className="mt-2 text-xs text-slate-500">🔒 Stored only in this browser tab — never saved or logged. Sent directly to OpenAI.</p>
           </Field>
           <Field label="User message">
             <input
