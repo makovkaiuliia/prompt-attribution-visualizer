@@ -42,6 +42,11 @@ The API key lives only in the browser tab's memory — it is never stored or log
 
 Select "paris" → rule #2 (lowercase) is highlighted as the cause, in conflict with rule #4 (capitalization).
 
+## ⚠️ Limitations
+
+- **OpenAI only** for now — the provider is hardcoded (`gpt-4o`); other providers aren't supported yet.
+- **System prompt only** — attribution currently covers the system prompt. The user message is passed as context but is not treated as an attribution source yet.
+
 ## 🛠️ Tech
 
 - React 18 + Vite
